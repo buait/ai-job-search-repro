@@ -53,3 +53,8 @@
 
 - 新增测试：`python3 -m unittest tests.test_dashboard_state` → 14 项全部通过
 - 战报工具实测：`python3 tools/dashboard_state.py` → 正常输出中文战报（空工作区显示提示文案，不报错）
+## 六、已知说明：GitHub Actions 工作流文件的处理
+
+原仓库包含两个 GitHub Actions 工作流文件（`.github/workflows/ci.yml`、`.github/workflows/upstream-watch.yml`）。GitHub 要求写入 workflow 文件的 OAuth Token 具备 `workflow` 权限，而本次复现使用的 token 仅含 `repo` 权限，首次推送被 GitHub 拒绝。为保证仓库主体正常推送，工作流文件从本次提交中排除（本地文件完整保留）。
+
+如后续获得 `workflow` 权限（`gh auth refresh -s workflow`），可随时补推这两个文件恢复 CI。
